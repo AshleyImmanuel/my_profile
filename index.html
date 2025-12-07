@@ -31,9 +31,7 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -46,15 +44,8 @@
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
     main {
       max-width: var(--max-width);
@@ -145,23 +136,15 @@
       transition: width 0.16s ease-out;
     }
 
-    .nav-links a:hover {
-      color: var(--fg);
-    }
+    .nav-links a:hover { color: var(--fg); }
 
     .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
+    .nav-links a.active::after { width: 100%; }
 
-    .nav-links a.active {
-      color: var(--fg);
-    }
+    .nav-links a.active { color: var(--fg); }
 
     @media (max-width: 720px) {
-      .nav-links {
-        display: none;
-      }
+      .nav-links { display: none; }
     }
 
     /* HERO */
@@ -305,14 +288,10 @@
       transform: translateY(-1px);
     }
 
-    .btn-icon {
-      font-size: 1.1rem;
-    }
+    .btn-icon { font-size: 1.1rem; }
 
     /* HERO PROFILE CARD */
-    .hero-right {
-      position: relative;
-    }
+    .hero-right { position: relative; }
 
     .hero-card {
       border-radius: var(--radius-lg);
@@ -345,9 +324,7 @@
       flex-shrink: 0;
     }
 
-    .hero-profile-text {
-      font-size: 0.83rem;
-    }
+    .hero-profile-text { font-size: 0.83rem; }
 
     .hero-profile-name {
       font-size: 0.96rem;
@@ -384,6 +361,7 @@
       margin-bottom: 0.9rem;
       font-size: 0.76rem;
       color: var(--muted);
+      flex-wrap: wrap;
     }
 
     .hero-pill {
@@ -392,6 +370,7 @@
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.7);
       background: rgba(15, 23, 42, 0.96);
+      min-width: 160px;
     }
 
     .hero-stack-label {
@@ -437,10 +416,12 @@
       display: flex;
       gap: 0.8rem;
       font-size: 0.78rem;
+      flex-wrap: wrap;
     }
 
     .hero-metric {
       flex: 1;
+      min-width: 180px;
       border-radius: 14px;
       border: 1px solid rgba(148, 163, 184, 0.7);
       background: rgba(15, 23, 42, 0.98);
@@ -456,9 +437,7 @@
     }
 
     /* GENERIC SECTIONS */
-    section {
-      margin-bottom: 4rem;
-    }
+    section { margin-bottom: 4rem; }
 
     .section-kicker {
       font-size: 0.72rem;
@@ -490,9 +469,7 @@
     }
 
     @media (max-width: 900px) {
-      .about-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      .about-grid { grid-template-columns: minmax(0, 1fr); }
     }
 
     .about-text {
@@ -526,9 +503,7 @@
       margin-bottom: 0.15rem;
     }
 
-    .about-meta-value {
-      font-size: 0.88rem;
-    }
+    .about-meta-value { font-size: 0.88rem; }
 
     .pill-group-title {
       font-size: 0.72rem;
@@ -552,6 +527,113 @@
       padding: 5px 10px;
       font-size: 0.78rem;
     }
+
+    /* TIMELINE */
+    .timeline {
+      margin-top: 2rem;
+      border-left: 1px solid rgba(148, 163, 184, 0.5);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 0;
+      bottom: 0;
+      border-left: 1px dashed rgba(148, 163, 184, 0.4);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.4rem;
+      padding-left: 0.4rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -1.3rem;
+      top: 0.2rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.8);
+    }
+
+    .timeline-period {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.05rem;
+    }
+
+    .timeline-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.1rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* EXPERTISE BARS */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+      margin-top: 1.8rem;
+    }
+
+    .expertise-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 0.95rem 1rem 1.1rem;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.86rem;
+    }
+
+    .expertise-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+
+    .expertise-title { font-size: 0.9rem; }
+
+    .expertise-percent {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .expertise-bar {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .expertise-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #fde68a);
+      box-shadow: 0 0 18px rgba(249, 115, 22, 0.9);
+    }
+
+    .expertise-fill.fs    { --target-width: 88%; }
+    .expertise-fill.web   { --target-width: 84%; }
+    .expertise-fill.data  { --target-width: 78%; }
+    .expertise-fill.linux { --target-width: 70%; }
+    .expertise-fill.sec   { --target-width: 64%; }
 
     /* PROJECTS */
     .projects-grid {
@@ -627,9 +709,7 @@
       color: var(--accent);
     }
 
-    .project-link:hover {
-      text-decoration: underline;
-    }
+    .project-link:hover { text-decoration: underline; }
 
     /* CONTACT */
     .contact-card {
@@ -645,9 +725,7 @@
     }
 
     @media (max-width: 880px) {
-      .contact-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      .contact-card { grid-template-columns: minmax(0, 1fr); }
     }
 
     .contact-chips {
@@ -706,22 +784,15 @@
       text-align: center;
     }
 
-    /* SIMPLE REVEAL ANIMATION */
+    /* SCROLL REVEAL */
     .reveal {
       opacity: 0;
       transform: translateY(18px);
-      animation: fadeUp 0.6s ease-out forwards;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-
-    .reveal-delay-1 { animation-delay: 0.12s; }
-    .reveal-delay-2 { animation-delay: 0.22s; }
-    .reveal-delay-3 { animation-delay: 0.32s; }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @media (max-width: 600px) {
@@ -731,10 +802,7 @@
       .hero-subtitle,
       .hero-tags { text-align: center; }
       .hero-left { text-align: center; }
-      .hero-card {
-        max-width: 430px;
-        margin: 0 auto;
-      }
+      .hero-card { max-width: 430px; margin: 0 auto; }
     }
   </style>
 </head>
@@ -746,12 +814,13 @@
       <div class="brand-badge">AI</div>
       <div>
         <div class="brand-text-main">Ashley Immanuel</div>
-        <div class="brand-text-sub">Full-Stack · CS (Data Analytics)</div>
+        <div class="brand-text-sub">Full-stack · CS (Data Analytics)</div>
       </div>
     </div>
     <nav class="nav-links">
       <a href="#hero" class="active">Home</a>
       <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -771,9 +840,9 @@
       </h1>
       <p class="hero-subtitle">
         I am a <strong>2nd year BSc Computer Science (Data Analytics)</strong> student at
-        <strong>Rajagiri College of Social Sciences (Autonomous)</strong>.  
-        I enjoy working on <strong>full-stack projects</strong>, experimenting with
-        <strong>mobile & desktop apps</strong>, and exploring <strong>cybersecurity</strong> using Linux.
+        <strong>Rajagiri College of Social Sciences (Autonomous)</strong>. I enjoy working on
+        <strong>full-stack projects</strong>, experimenting with <strong>mobile & desktop apps</strong>,
+        and exploring <strong>cybersecurity</strong> using Linux.
       </p>
       <div class="hero-tags">
         <div class="hero-tag">
@@ -800,7 +869,7 @@
       </div>
     </div>
 
-    <div class="hero-right reveal reveal-delay-1">
+    <div class="hero-right reveal">
       <div class="hero-card">
         <div class="hero-profile">
           <div class="hero-photo">
@@ -815,7 +884,7 @@
             </div>
             <div class="hero-status">
               <span class="hero-status-dot"></span>
-              <span>Available for remote client work & projects</span>
+              <span>Available for work from home & client projects</span>
             </div>
           </div>
         </div>
@@ -831,9 +900,9 @@
           <span class="hero-stack-chip">C++</span>
           <span class="hero-stack-chip">Java</span>
           <span class="hero-stack-chip">Python</span>
+          <span class="hero-stack-chip">JavaScript</span>
           <span class="hero-stack-chip">HTML</span>
           <span class="hero-stack-chip">CSS</span>
-          <span class="hero-stack-chip">JavaScript</span>
           <span class="hero-stack-chip">MySQL</span>
           <span class="hero-stack-chip">PL/SQL</span>
           <span class="hero-stack-chip">Data Structures (C)</span>
@@ -847,13 +916,17 @@
           <span class="hero-stack-chip">Matplotlib</span>
           <span class="hero-stack-chip">Streamlit</span>
           <span class="hero-stack-chip">Scikit-learn</span>
-          <span class="hero-stack-chip">Flask (learning)</span>
+          <span class="hero-stack-chip">PostgreSQL (learning)</span>
+          <span class="hero-stack-chip">SQLite (learning)</span>
         </div>
 
         <div class="hero-stack-label">Systems & extras</div>
         <div class="hero-tags-small">
           <span class="hero-tag-small">Linux · Ubuntu</span>
           <span class="hero-tag-small">Linux · Kali (basics)</span>
+          <span class="hero-tag-small">MERN experiments</span>
+          <span class="hero-tag-small">Next.js basics</span>
+          <span class="hero-tag-small">Flutter & Dart basics</span>
           <span class="hero-tag-small">Rust (beginner)</span>
           <span class="hero-tag-small">Git & GitHub</span>
           <span class="hero-tag-small">Prompt engineering</span>
@@ -863,19 +936,19 @@
         <div class="hero-metrics">
           <div class="hero-metric">
             <div class="hero-metric-label">Learning</div>
-            <div>Deeper full-stack, APIs, Linux tools, practical security.</div>
+            <div>Deeper full-stack, MERN, APIs, Linux tools, practical security.</div>
           </div>
           <div class="hero-metric">
             <div class="hero-metric-label">Interested in</div>
-            <div>Remote projects, dashboards, event platforms, utilities.</div>
+            <div>Work from home & client projects.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT / SKILLS -->
-  <section id="about" class="reveal reveal-delay-1">
+  <!-- ABOUT + TIMELINE -->
+  <section id="about" class="reveal">
     <div class="section-kicker">About</div>
     <div class="section-title">Who I am</div>
     <div class="section-subtitle">
@@ -883,19 +956,42 @@
     </div>
 
     <div class="about-grid" style="margin-top: 1.8rem;">
-      <div class="about-text">
-        I am currently studying <strong>BSc Computer Science (Data Analytics)</strong> at
-        Rajagiri College of Social Sciences (Autonomous). I like building practical projects:
-        event websites, random pickers, analysis tools, and utilities that people actually use.
-        <br><br>
-        I enjoy working across the stack – from <strong>Python and Java</strong> on the logic side to
-        <strong>HTML, CSS and JavaScript</strong> on the front-end and <strong>SQL / data</strong> at the back.
-        I also explore <strong>mobile/desktop apps</strong> and learn the basics of
-        <strong>cybersecurity</strong> using Linux.
-        <br><br>
-        I completed my entire schooling (10th and 12th included) at
-        <strong>Kendriya Vidyalaya Kadavanthra</strong>, which gave me a strong base and a lot of exposure
-        to computers early on.
+      <div>
+        <p class="about-text">
+          I am currently studying <strong>BSc Computer Science (Data Analytics)</strong> at
+          Rajagiri College of Social Sciences (Autonomous). I like building practical projects:
+          event websites, random pickers, analysis tools, and utilities that people actually use.
+          <br><br>
+          I enjoy working across the stack – from <strong>Python and Java</strong> on the logic side to
+          <strong>HTML, CSS and JavaScript</strong> on the front-end and <strong>SQL / data</strong> at the back.
+          I also experiment with <strong>mobile/desktop apps</strong> and explore
+          <strong>cybersecurity</strong> using Linux.
+          <br><br>
+          I completed my entire schooling (10th and 12th included) at
+          <strong>Kendriya Vidyalaya Kadavanthra</strong>, which gave me a solid base and a lot of time with computers.
+        </p>
+
+        <!-- Timeline -->
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-period">2010 – 2023</div>
+            <div class="timeline-title">Schooling · Kendriya Vidyalaya Kadavanthra</div>
+            <div class="timeline-desc">Completed entire schooling including 10th and 12th, started exploring programming and computers.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-period">2023 – Present</div>
+            <div class="timeline-title">BSc CS (Data Analytics) · Rajagiri</div>
+            <div class="timeline-desc">Learning core CS, data analytics and statistics with a focus on programming and real projects.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-period">Now</div>
+            <div class="timeline-title">Full-stack, data & security</div>
+            <div class="timeline-desc">Building tools, event sites and analysis apps while exploring MERN, Flutter, Next.js, Linux and security.</div>
+          </div>
+        </div>
       </div>
 
       <div class="about-card">
@@ -943,6 +1039,9 @@
             <span class="pill">JavaScript</span>
             <span class="pill">Streamlit</span>
             <span class="pill">Flask (learning)</span>
+            <span class="pill">MERN stack (learning)</span>
+            <span class="pill">Next.js (learning)</span>
+            <span class="pill">Flutter & Dart (learning)</span>
             <span class="pill">Rust (beginner)</span>
           </div>
         </div>
@@ -957,6 +1056,8 @@
             <span class="pill">Seaborn</span>
             <span class="pill">Matplotlib</span>
             <span class="pill">Scikit-learn</span>
+            <span class="pill">PostgreSQL (learning)</span>
+            <span class="pill">SQLite (learning)</span>
             <span class="pill">Data Structures (C)</span>
           </div>
         </div>
@@ -975,8 +1076,84 @@
     </div>
   </section>
 
+  <!-- EXPERTISE BARS -->
+  <section id="expertise" class="reveal">
+    <div class="section-kicker">Expertise</div>
+    <div class="section-title">What I’m strongest at right now</div>
+    <div class="section-subtitle">
+      Rough idea of where my current skills are focused. Always shifting as I learn more.
+    </div>
+
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="expertise-label">
+          <span class="expertise-title">Full-stack development</span>
+          <span class="expertise-percent">~88%</span>
+        </div>
+        <div class="expertise-bar">
+          <div class="expertise-fill fs"></div>
+        </div>
+        <p style="margin-top:0.4rem; color:var(--muted); font-size:0.8rem;">
+          Python / Java backends, simple APIs, event sites and utilities. Experimenting with MERN and Next.js.
+        </p>
+      </div>
+
+      <div class="expertise-card">
+        <div class="expertise-label">
+          <span class="expertise-title">Web & UI</span>
+          <span class="expertise-percent">~84%</span>
+        </div>
+        <div class="expertise-bar">
+          <div class="expertise-fill web"></div>
+        </div>
+        <p style="margin-top:0.4rem; color:var(--muted); font-size:0.8rem;">
+          HTML, CSS, JS, layout thinking, event websites, interactive pages, vibe coding sessions.
+        </p>
+      </div>
+
+      <div class="expertise-card">
+        <div class="expertise-label">
+          <span class="expertise-title">Data & ML</span>
+          <span class="expertise-percent">~78%</span>
+        </div>
+        <div class="expertise-bar">
+          <div class="expertise-fill data"></div>
+        </div>
+        <p style="margin-top:0.4rem; color:var(--muted); font-size:0.8rem;">
+          Pandas, NumPy, visualisation, basic ML with Scikit-learn and IPL analysis style projects.
+        </p>
+      </div>
+
+      <div class="expertise-card">
+        <div class="expertise-label">
+          <span class="expertise-title">Linux & tooling</span>
+          <span class="expertise-percent">~70%</span>
+        </div>
+        <div class="expertise-bar">
+          <div class="expertise-fill linux"></div>
+        </div>
+        <p style="margin-top:0.4rem; color:var(--muted); font-size:0.8rem;">
+          Comfortable on Ubuntu, exploring Kali basics and security tools, terminal workflows & scripting.
+        </p>
+      </div>
+
+      <div class="expertise-card">
+        <div class="expertise-label">
+          <span class="expertise-title">Security curiosity</span>
+          <span class="expertise-percent">~64%</span>
+        </div>
+        <div class="expertise-bar">
+          <div class="expertise-fill sec"></div>
+        </div>
+        <p style="margin-top:0.4rem; color:var(--muted); font-size:0.8rem;">
+          Learning ethical hacking concepts, CTF-style thinking, and secure coding habits.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
-  <section id="projects" class="reveal reveal-delay-2">
+  <section id="projects" class="reveal">
     <div class="section-kicker">Projects</div>
     <div class="section-title">Things I’ve built and am building</div>
     <div class="section-subtitle">
@@ -1074,7 +1251,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="reveal reveal-delay-3">
+  <section id="contact" class="reveal">
     <div class="section-kicker">Contact</div>
     <div class="section-title">Work from home. Projects. Client work.</div>
     <div class="section-subtitle">
@@ -1123,6 +1300,30 @@
 <footer>
   © 2024 Ashley Immanuel. Built with HTML, CSS and a healthy dose of orange.
 </footer>
+
+<script>
+  // scroll reveal with IntersectionObserver
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+          // animate expertise bars once visible
+          if (entry.target.id === 'expertise') {
+            document.querySelectorAll('.expertise-fill').forEach(bar => {
+              const target = bar.style.getPropertyValue('--target-width');
+              bar.style.width = target;
+            });
+          }
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>

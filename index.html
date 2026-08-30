@@ -15,7 +15,7 @@
       --bg-card: #0b1022;
       --fg: #e5e7eb;
       --muted: #9ca3af;
-      --accent: #fb923c; /* orange */
+      --accent: #fb923c;
       --accent-strong: #f97316;
       --accent-soft: rgba(251, 146, 60, 0.15);
       --border-soft: rgba(148, 163, 184, 0.4);
@@ -92,6 +92,24 @@
       font-weight: 600;
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
       font-family: "Space Grotesk", system-ui, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-badge::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      border-top-color: rgba(251, 146, 60, 0.95);
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: spinRing 4s linear infinite;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
     }
 
     .brand-text-main {
@@ -145,6 +163,81 @@
 
     @media (max-width: 720px) {
       .nav-links { display: none; }
+    }
+
+    /* TECH MARQUEE */
+    .tech-strip {
+      margin: 0 auto 2.4rem;
+      max-width: var(--max-width);
+      padding: 0.9rem 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 0 50%, rgba(15, 23, 42, 0.95), transparent 65%);
+    }
+
+    .tech-strip::before,
+    .tech-strip::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 70px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .tech-strip::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+    }
+
+    .tech-strip::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    }
+
+    .tech-marquee {
+      display: flex;
+      gap: 2.3rem;
+      align-items: center;
+      white-space: nowrap;
+      animation: marqueeSlide 30s linear infinite;
+    }
+
+    .tech-marquee:hover { animation-play-state: paused; }
+
+    @keyframes marqueeSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .tech-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .tech-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .tech-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     /* HERO */
@@ -627,6 +720,7 @@
       border-radius: inherit;
       background: linear-gradient(90deg, var(--accent), #fde68a);
       box-shadow: 0 0 18px rgba(249, 115, 22, 0.9);
+      transition: width 1.1s ease-out;
     }
 
     .expertise-fill.fs    { --target-width: 88%; }
@@ -803,10 +897,137 @@
       .hero-tags { text-align: center; }
       .hero-left { text-align: center; }
       .hero-card { max-width: 430px; margin: 0 auto; }
+      .tech-strip { margin-inline: 1rem; }
+    }
+
+    /* LANDING OVERLAY ANIMATION – ORBIT EFFECT */
+    .landing-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.4), transparent 60%), #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.6rem;
+      z-index: 999;
+      color: #e5e7eb;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      pointer-events: auto;
+      animation: overlayFadeOut 2.2s ease-out 1.1s forwards;
+    }
+
+    .landing-orbit {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .landing-planet {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fde68a, #fb923c);
+      box-shadow:
+        0 0 25px rgba(251, 191, 36, 0.6),
+        0 0 60px rgba(249, 115, 22, 0.4);
+    }
+
+    .landing-orbit-ring {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-top-color: rgba(251, 146, 60, 0.95);
+      border-right-color: transparent;
+      border-left-color: transparent;
+      animation: orbitSpin 3.4s linear infinite;
+    }
+
+    .landing-orbit-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.9);
+      transform-origin: 60px 0;
+      animation: orbitDot 3.4s linear infinite;
+    }
+
+    .landing-text-block {
+      text-align: center;
+    }
+
+    .landing-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 0.25rem;
+    }
+
+    .landing-name {
+      font-size: 2rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .landing-sub {
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .landing-enter {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6b7280;
+      animation: blinkHint 1.1s ease-in-out 0.9s infinite alternate;
+    }
+
+    @keyframes orbitSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes orbitDot {
+      from { transform: rotate(0deg) translate(60px, 0); }
+      to   { transform: rotate(360deg) translate(60px, 0); }
+    }
+
+    @keyframes blinkHint {
+      0% { opacity: 0.35; transform: translateY(2px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes overlayFadeOut {
+      0% { opacity: 1; }
+      75% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; pointer-events: none; }
     }
   </style>
 </head>
 <body>
+<div class="landing-overlay">
+  <div class="landing-orbit">
+    <div class="landing-planet"></div>
+    <div class="landing-orbit-ring"></div>
+    <div class="landing-orbit-dot"></div>
+  </div>
+  <div class="landing-text-block">
+    <div class="landing-kicker">Portfolio of</div>
+    <div class="landing-name">ASHLEY IMMANUEL</div>
+    <div class="landing-sub">FULL‑STACK · DATA · LINUX</div>
+  </div>
+  <div class="landing-enter">Press any key or scroll to enter</div>
+</div>
 
 <header>
   <div class="nav-inner">
@@ -826,6 +1047,103 @@
     </nav>
   </div>
 </header>
+
+<!-- LOGO MARQUEE -->
+<div class="tech-strip">
+  <div class="tech-marquee">
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java logo">
+      </span>
+      <span>Java</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python logo">
+      </span>
+      <span>Python</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript logo">
+      </span>
+      <span>JavaScript</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML logo">
+      </span>
+      <span>HTML</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS logo">
+      </span>
+      <span>CSS</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL logo">
+      </span>
+      <span>MySQL</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL logo">
+      </span>
+      <span>PostgreSQL</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite logo">
+      </span>
+      <span>SQLite</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas logo">
+      </span>
+      <span>Pandas</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy logo">
+      </span>
+      <span>NumPy</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux logo">
+      </span>
+      <span>Linux</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git logo">
+      </span>
+      <span>Git</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub logo">
+      </span>
+      <span>GitHub</span>
+    </div>
+    <!-- duplicate some items for smooth loop -->
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java logo">
+      </span>
+      <span>Java</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python logo">
+      </span>
+      <span>Python</span>
+    </div>
+  </div>
+</div>
 
 <main>
   <!-- HERO -->
@@ -1302,18 +1620,31 @@
 </footer>
 
 <script>
-  // scroll reveal with IntersectionObserver
+  // close landing overlay on interaction
+  const landing = document.querySelector('.landing-overlay');
+  function closeLanding() {
+    if (!landing) return;
+    landing.style.animation = 'overlayFadeOut 0.8s ease-out forwards';
+    window.removeEventListener('keydown', closeLanding);
+    window.removeEventListener('wheel', closeLanding);
+    window.removeEventListener('touchstart', closeLanding);
+  }
+  window.addEventListener('keydown', closeLanding);
+  window.addEventListener('wheel', closeLanding, { passive: true });
+  window.addEventListener('touchstart', closeLanding, { passive: true });
+
+  // scroll reveal with IntersectionObserver + expertise bars
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           obs.unobserve(entry.target);
-          // animate expertise bars once visible
+
           if (entry.target.id === 'expertise') {
             document.querySelectorAll('.expertise-fill').forEach(bar => {
-              const target = bar.style.getPropertyValue('--target-width');
-              bar.style.width = target;
+              const target = getComputedStyle(bar).getPropertyValue('--target-width');
+              bar.style.width = target || '0%';
             });
           }
         }

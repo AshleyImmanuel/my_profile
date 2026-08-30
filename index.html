@@ -1,478 +1,1130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashley Immanuel | Aspiring Programmer</title>
-    
-    <!-- Standard Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>Ashley Immanuel | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* IMPORT FONTS */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap');
-        
-        /* CUSTOM VARIABLES (Fail-safe) */
-        :root {
-            --bg-dark: #0f172a; /* Slate 900 */
-            --text-light: #e2e8f0; /* Slate 200 */
-            --accent-cyan: #22d3ee; /* Cyan 400 */
-            --glass-bg: rgba(15, 23, 42, 0.7);
-            --glass-border: rgba(34, 211, 238, 0.1);
-        }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-            margin: 0;
-        }
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #090b1f;
+      --bg-card: #0b1022;
+      --fg: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #fb923c; /* orange */
+      --accent-strong: #f97316;
+      --accent-soft: rgba(251, 146, 60, 0.15);
+      --border-soft: rgba(148, 163, 184, 0.4);
+      --shadow-strong: 0 22px 60px rgba(0, 0, 0, 0.9);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1100px;
+    }
 
-        h1, h2, h3, .font-display {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* --- WELCOME ANIMATION STYLES --- */
-        #welcome-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: #020617; /* Slate 950 */
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1.5s ease-in-out;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .welcome-text {
-            font-size: 2rem;
-            font-weight: 700;
-            color: transparent;
-            background-clip: text;
-            -webkit-background-clip: text;
-            background-image: linear-gradient(to right, #22d3ee, #3b82f6);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        
-        .welcome-text.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #1e293b 0, transparent 50%),
+        radial-gradient(circle at bottom right, #7c2d12 0, transparent 55%),
+        var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        #start-btn {
-            margin-top: 2rem;
-            padding: 0.75rem 2rem;
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            border-radius: 9999px;
-            color: #22d3ee;
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: transparent;
-        }
-        
-        #start-btn:hover {
-            background: rgba(34, 211, 238, 0.1);
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* --- MAIN CONTENT TRANSITIONS --- */
-        #main-content {
-            opacity: 0;
-            transform: scale(0.98);
-            transition: opacity 2s ease-out, transform 2s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        #main-content.active {
-            opacity: 1;
-            transform: scale(1);
-        }
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
 
-        /* --- GLOBAL PARALLAX BACKGROUND --- */
-        #global-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 130vh;
-            object-fit: cover;
-            z-index: -50;
-            will-change: transform;
-            pointer-events: none;
-            filter: brightness(0.5) contrast(1.1); 
-        }
-        
-        #bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -40;
-            pointer-events: none;
-        }
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(5, 8, 22, 0.96), rgba(5, 8, 22, 0.85), transparent);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.7);
+    }
 
-        /* Glass Panel Styling */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
-        }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.65rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        /* Skill Chips */
-        .skill-chip {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
-            cursor: default;
-            display: inline-block;
-        }
-        .skill-chip:hover {
-            background: rgba(6, 182, 212, 0.15);
-            border-color: var(--accent-cyan);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
-            color: var(--accent-cyan);
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
 
-        /* CSS Keyframes Animation */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.5);
+      background:
+        radial-gradient(circle at 30% 20%, var(--accent-strong), #1f2937);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+    }
 
-        html { scroll-behavior: smooth; }
-    </style>
+    .brand-text-main {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .brand-text-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 2px;
+      font-weight: 500;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #fed7aa);
+      transition: width 0.16s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--fg);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2.8rem;
+      align-items: center;
+      padding: 2.6rem 0 3.5rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 2rem;
+      }
+    }
+
+    .kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .kicker-pill {
+      padding: 2px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.15;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, var(--accent), #fde68a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.96rem;
+      color: var(--muted);
+      max-width: 32rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle strong {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      padding: 4px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .hero-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #166534);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      background: none;
+      color: inherit;
+      transition:
+        transform 120ms ease-out,
+        box-shadow 120ms ease-out,
+        background 120ms ease-out,
+        border-color 120ms ease-out,
+        color 120ms ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+      color: #111827;
+      box-shadow: 0 16px 36px rgba(124, 45, 18, 0.8);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(124, 45, 18, 0.95);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      font-size: 1.1rem;
+    }
+
+    /* HERO PROFILE CARD */
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background:
+        radial-gradient(circle at 0 0, var(--accent-soft), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.18), transparent 55%),
+        var(--bg-card);
+      padding: 1.4rem 1.3rem 1.2rem;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .hero-profile {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid rgba(248, 250, 252, 0.8);
+      background: radial-gradient(circle at 20% 10%, #1e293b, #020617);
+      box-shadow:
+        0 0 18px rgba(251, 146, 60, 0.4),
+        0 0 30px rgba(249, 115, 22, 0.3);
+      flex-shrink: 0;
+    }
+
+    .hero-profile-text {
+      font-size: 0.83rem;
+    }
+
+    .hero-profile-name {
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .hero-profile-role {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-pill-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .hero-pill {
+      flex: 1;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .hero-stack-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-stack-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-stack-chip {
+      font-size: 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 2px 8px;
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .hero-tags-small {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      font-size: 0.74rem;
+    }
+
+    .hero-tag-small {
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      padding: 3px 8px;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.78rem;
+    }
+
+    .hero-metric {
+      flex: 1;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 0.6rem 0.7rem;
+    }
+
+    .hero-metric-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    /* GENERIC SECTIONS */
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .section-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 31rem;
+    }
+
+    /* ABOUT + SKILLS */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.3fr) minmax(0, 2.4fr);
+      gap: 2.4rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .about-text {
+      font-size: 0.94rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .about-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 1.2rem 1.3rem;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.86rem;
+    }
+
+    .about-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-meta-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .about-meta-value {
+      font-size: 0.88rem;
+    }
+
+    .pill-group-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0.6rem 0 0.4rem;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.97);
+      padding: 5px 10px;
+      font-size: 0.78rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.7rem;
+    }
+
+    .project-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 1.1rem 1.1rem 1rem;
+      box-shadow: var(--shadow-strong);
+      transition:
+        transform 140ms ease-out,
+        box-shadow 140ms ease-out,
+        border-color 140ms ease-out;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95);
+      border-color: rgba(249, 115, 22, 0.9);
+    }
+
+    .project-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .project-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-tech {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .project-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-pill {
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.74rem;
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .project-link {
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTACT */
+    .contact-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 1.3rem 1.3rem 1.1rem;
+      box-shadow: var(--shadow-strong);
+      display: grid;
+      grid-template-columns: minmax(0, 2.7fr) minmax(0, 2.1fr);
+      gap: 1.3rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 880px) {
+      .contact-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .contact-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .contact-chip {
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .contact-link-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      padding: 0.55rem 0.9rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--fg);
+      transition:
+        transform 120ms ease-out,
+        box-shadow 120ms ease-out,
+        border-color 120ms ease-out,
+        color 120ms ease-out,
+        background 120ms ease-out;
+    }
+
+    .contact-link-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.95);
+    }
+
+    footer {
+      padding: 1.5rem 1.5rem 1rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* SIMPLE REVEAL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.6s ease-out forwards;
+    }
+
+    .reveal-delay-1 {
+      animation-delay: 0.12s;
+    }
+
+    .reveal-delay-2 {
+      animation-delay: 0.22s;
+    }
+
+    .reveal-delay-3 {
+      animation-delay: 0.32s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding-inline: 1rem;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-title,
+      .hero-subtitle,
+      .hero-tags {
+        text-align: center;
+      }
+      .hero-left {
+        text-align: center;
+      }
+      .hero-card {
+        max-width: 430px;
+        margin: 0 auto;
+      }
+    }
+  </style>
 </head>
-<body class="antialiased text-slate-200 selection:bg-cyan-400 selection:text-white">
+<body>
 
-    <!-- === WELCOME OVERLAY === -->
-    <div id="welcome-overlay">
-        <div class="text-center">
-            <!-- This text appears after click -->
-            <h1 id="welcome-msg" class="welcome-text font-display text-4xl md:text-6xl">
-                Welcome, Ashley Immanuel
-            </h1>
-            
-            <!-- Initial Button -->
-            <button id="start-btn">Enter Portfolio</button>
+<header>
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-badge">AI</div>
+      <div>
+        <div class="brand-text-main">Ashley Immanuel</div>
+        <div class="brand-text-sub">Aspiring Programmer</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#hero" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-left reveal">
+      <div class="kicker">
+        Portfolio
+        <span class="kicker-pill">BSc CS · Data Analytics</span>
+      </div>
+      <h1 class="hero-title">
+        Building code, data stories and <span>clean interfaces.</span>
+      </h1>
+      <p class="hero-subtitle">
+        I am a <strong>2nd year BSc Computer Science (Data Analytics)</strong> student at
+        <strong>Rajagiri College of Social Sciences (Autonomous)</strong>. I enjoy turning ideas into small,
+        useful tools and learning new tech through projects.
+      </p>
+      <div class="hero-tags">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Programming & data
         </div>
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Vibe coding sessions
+        </div>
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Front-end curious
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <span>View projects</span>
+          <span class="btn-icon">↗</span>
+        </a>
+        <a href="#contact" class="btn btn-ghost">
+          <span>Work from home · contact</span>
+        </a>
+      </div>
     </div>
 
-
-    <!-- BACKGROUND IMAGE -->
-    <img id="global-bg" 
-         src="./image_e2eb7c.jpg" 
-         alt="Parallax Background"
-         onerror="this.src='https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=2070&auto=format&fit=crop'">
-    
-    <!-- Grid Overlay -->
-    <div id="bg-overlay"></div>
-
-    <!-- MAIN CONTENT WRAPPER -->
-    <div id="main-content">
-
-        <!-- Navigation -->
-        <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
-            <div class="glass-panel">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex items-center justify-between h-16">
-                        <div class="flex-shrink-0">
-                            <span class="text-2xl font-bold text-white tracking-tight font-display">AI<span class="text-cyan-400">.</span></span>
-                        </div>
-                        <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-8">
-                                <a href="#hero" class="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-wide">Home</a>
-                                <a href="#about" class="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-wide">About</a>
-                                <a href="#projects" class="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-wide">Projects</a>
-                                <a href="#contact" class="px-5 py-2 rounded-full border border-cyan-500 bg-cyan-500/10 text-cyan-400 font-bold text-sm transition-all transform hover:bg-cyan-500 hover:text-white uppercase tracking-wider">Hire Me</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="hero-right reveal reveal-delay-1">
+      <div class="hero-card">
+        <div class="hero-profile">
+          <div class="hero-photo">
+            <img src="./meee.jpg"
+                 alt="Ashley Immanuel"
+                 onerror="this.src='https://ui-avatars.com/api/?name=Ashley+Immanuel&background=111827&color=fb923c&size=256&bold=true';">
+          </div>
+          <div class="hero-profile-text">
+            <div class="hero-profile-name">Ashley Immanuel</div>
+            <div class="hero-profile-role">
+              BSc CS (Data Analytics) · 2nd Year · Rajagiri
             </div>
-        </nav>
-
-        <!-- 1. HERO SECTION -->
-        <section id="hero" class="h-screen flex items-center justify-center relative">
-            <div class="relative z-20 text-center px-4 max-w-4xl mx-auto mt-16">
-                <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm font-bold font-mono tracking-widest uppercase animate-fade-in-up">
-                    Aspiring Programmer
-                </div>
-                <h1 class="text-5xl md:text-8xl font-bold text-white mb-6 leading-none tracking-tight drop-shadow-lg animate-fade-in-up font-display">
-                    HELLO, I'M <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">ASHLEY IMMANUEL</span>
-                </h1>
-                <p class="text-lg md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
-                    2nd Year BSc Computer Science (Data Analytics) student at Rajagiri College Of Social Sciences (Autonomous).
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style="animation-delay: 0.4s;">
-                    <a href="#projects" class="w-full sm:w-auto px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-full transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(34,211,238,0.4)] uppercase tracking-wide">
-                        View Projects
-                    </a>
-                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-slate-500 hover:border-cyan-400 hover:text-cyan-400 text-white font-semibold rounded-full transition-all backdrop-blur-sm uppercase tracking-wide">
-                        Contact Me
-                    </a>
-                </div>
+            <div class="hero-status">
+              <span class="hero-status-dot"></span>
+              <span>Available for remote client work & projects</span>
             </div>
-        </section>
+          </div>
+        </div>
 
-        <!-- 2. ABOUT SECTION -->
-        <section id="about" class="py-24 relative z-30 bg-slate-900/80 backdrop-blur-sm border-t border-slate-800">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div class="relative group">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-teal-300 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                        <div class="relative bg-slate-800 rounded-2xl p-1 overflow-hidden">
-                           <img src="./meee.jpg" 
-                                alt="Profile" 
-                                class="rounded-xl w-full object-cover shadow-2xl transition-all duration-500 hover:scale-[1.02]"
-                                onerror="this.src='https://ui-avatars.com/api/?name=Ashley+Immanuel&background=06b6d4&color=fff&size=500&font-size=0.35&bold=true';">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-display uppercase">About Me</h2>
-                        <p class="text-slate-400 text-lg leading-relaxed mb-6 border-l-4 border-cyan-500 pl-6">
-                            I am a passionate 2nd-year undergraduate student pursuing a BSc in Computer Science with a specialization in Data Analytics. I am building a strong foundation in programming and love exploring how code can solve real-world problems.
-                        </p>
-                        
-                        <div class="grid grid-cols-2 gap-6 mt-8 border-t border-slate-800 pt-8">
-                            <div>
-                                <h3 class="text-cyan-400 font-bold text-2xl mb-1 font-display">2nd Year</h3>
-                                <p class="text-xs text-slate-500 uppercase tracking-widest font-mono">Current Status</p>
-                            </div>
-                            <div>
-                                <h3 class="text-cyan-400 font-bold text-2xl mb-1 font-display">Rajagiri</h3>
-                                <p class="text-xs text-slate-500 uppercase tracking-widest font-mono">College (Autonomous)</p>
-                            </div>
-                        </div>
+        <div class="hero-pill-row">
+          <div class="hero-pill">Programming, data analytics, small tools</div>
+          <div class="hero-pill">Kerala, India</div>
+        </div>
 
-                        <div class="mt-10">
-                            <p class="text-xs text-slate-500 uppercase tracking-widest font-mono mb-4">Languages & Frameworks</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono cursor-default">C</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono cursor-default">C++</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono cursor-default">Python</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Streamlit</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Scikit-Learn</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Java</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Java Swing</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Dart</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">MySQL</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">PL/SQL</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Pandas</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Numpy</span>
-                                <span class="skill-chip px-3 py-1.5 rounded-lg text-cyan-400 text-sm font-mono">Data Structures (C)</span>
-                            </div>
-                            
-                             <div class="mt-6">
-                                <p class="text-xs text-slate-500 uppercase tracking-widest font-mono mb-4">Languages</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="skill-chip px-3 py-1.5 rounded-lg text-white text-sm font-mono">English</span>
-                                    <span class="skill-chip px-3 py-1.5 rounded-lg text-white text-sm font-mono">Hindi (Intermediate)</span>
-                                    <span class="skill-chip px-3 py-1.5 rounded-lg text-white text-sm font-mono">Malayalam</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="hero-stack-label">Core stack</div>
+        <div class="hero-stack-chips">
+          <span class="hero-stack-chip">C</span>
+          <span class="hero-stack-chip">C++</span>
+          <span class="hero-stack-chip">Java</span>
+          <span class="hero-stack-chip">Python</span>
+          <span class="hero-stack-chip">MySQL</span>
+          <span class="hero-stack-chip">PL/SQL</span>
+          <span class="hero-stack-chip">Data Structures (C)</span>
+        </div>
 
-        <!-- 3. PROJECTS SECTION -->
-        <section id="projects" class="py-32 relative z-30">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 font-display uppercase">Featured Work</h2>
-                    <p class="text-slate-300 max-w-2xl mx-auto">Deploying solutions.</p>
-                </div>
+        <div class="hero-stack-label">Data & tools</div>
+        <div class="hero-stack-chips">
+          <span class="hero-stack-chip">Pandas</span>
+          <span class="hero-stack-chip">NumPy</span>
+          <span class="hero-stack-chip">Seaborn</span>
+          <span class="hero-stack-chip">Matplotlib</span>
+          <span class="hero-stack-chip">Streamlit</span>
+          <span class="hero-stack-chip">Scikit-learn</span>
+        </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div class="group bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] hover:-translate-y-2">
-                        <div class="h-48 overflow-hidden relative">
-                            <div class="absolute inset-0 bg-cyan-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" alt="Quantum Pic">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors font-display uppercase">Quantum Pic</h3>
-                            <p class="text-slate-400 text-sm mb-4">A powerful randomizer tool that selects participants from Excel.</p>
-                            <a href="https://github.com/AshleyImmanuel" target="_blank" class="inline-flex items-center text-cyan-400 text-sm font-bold hover:text-cyan-300 uppercase tracking-wider">
-                                View Project <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                        </div>
-                    </div>
+        <div class="hero-stack-label">Extras</div>
+        <div class="hero-tags-small">
+          <span class="hero-tag-small">Rust (beginner)</span>
+          <span class="hero-tag-small">Git & GitHub</span>
+          <span class="hero-tag-small">Prompt engineering</span>
+          <span class="hero-tag-small">Vibe coding</span>
+        </div>
 
-                    <!-- Card 2 -->
-                    <div class="group bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] hover:-translate-y-2">
-                        <div class="h-48 overflow-hidden relative">
-                            <div class="absolute inset-0 bg-cyan-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" alt="IPL Analysis">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors font-display uppercase">IPL Analysis</h3>
-                            <p class="text-slate-400 text-sm mb-4 line-clamp-3">A data-driven web application built with Streamlit using Machine Learning.</p>
-                            <a href="https://github.com/AshleyImmanuel" target="_blank" class="inline-flex items-center text-cyan-400 text-sm font-bold hover:text-cyan-300 uppercase tracking-wider">
-                                View Project <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                        </div>
-                    </div>
+        <div class="hero-metrics">
+          <div class="hero-metric">
+            <div class="hero-metric-label">Learning</div>
+            <div>Rust, deeper ML, better UI thinking.</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hero-metric-label">Interested in</div>
+            <div>Remote projects, data tools, event sites.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                    <!-- Card 3 -->
-                    <div class="group bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] hover:-translate-y-2">
-                        <div class="h-48 overflow-hidden relative">
-                            <div class="absolute inset-0 bg-cyan-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" alt="Portfolio Website">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors font-display uppercase">Personal Portfolio</h3>
-                            <p class="text-slate-400 text-sm mb-4 line-clamp-3">A modern, responsive portfolio website featuring a dark aesthetic.</p>
-                            <a href="https://github.com/AshleyImmanuel" target="_blank" class="inline-flex items-center text-cyan-400 text-sm font-bold hover:text-cyan-300 uppercase tracking-wider">
-                                View Project <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. CONTACT SECTION -->
-        <section id="contact" class="py-24 bg-slate-950/90 relative z-30 border-t border-slate-900">
-            <div class="max-w-3xl mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-white mb-4 font-display uppercase">Initialize Contact</h2>
-                    <p class="text-slate-400 mb-8">Secure channels open.</p>
-                    
-                    <div class="flex flex-wrap justify-center gap-4 mb-10">
-                        <!-- Email -->
-                        <a href="mailto:immanuelashley77@gmail.com" class="flex items-center gap-2 px-5 py-3 bg-slate-900 border border-slate-800 rounded-full text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span class="font-medium font-mono text-sm">Email</span>
-                        </a>
-                        
-                        <!-- GitHub -->
-                        <a href="https://github.com/AshleyImmanuel" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 bg-slate-900 border border-slate-800 rounded-full text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            <span class="font-medium font-mono text-sm">GitHub</span>
-                        </a>
-
-                        <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/in/ashley-immanuel-81609731b/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-5 py-3 bg-slate-900 border border-slate-800 rounded-full text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            <span class="font-medium font-mono text-sm">LinkedIn</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="bg-slate-950 py-8 border-t border-slate-900 z-30 relative">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <p class="text-slate-500 text-sm font-mono">© 2024 Ashley Immanuel.</p>
-            </div>
-        </footer>
+  <!-- ABOUT / SKILLS -->
+  <section id="about" class="reveal reveal-delay-1">
+    <div class="section-kicker">About</div>
+    <div class="section-title">Who I am</div>
+    <div class="section-subtitle">
+      A programmer figuring things out by building them, one project at a time.
     </div>
 
-    <!-- JS Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            /* --- 1. WELCOME ANIMATION & AUDIO --- */
-            const startBtn = document.getElementById('start-btn');
-            const welcomeOverlay = document.getElementById('welcome-overlay');
-            const welcomeMsg = document.getElementById('welcome-msg');
-            const mainContent = document.getElementById('main-content');
-            const navbar = document.getElementById('navbar');
+    <div class="about-grid" style="margin-top: 1.8rem;">
+      <div class="about-text">
+        I am currently studying <strong>BSc Computer Science (Data Analytics)</strong> at
+        Rajagiri College of Social Sciences (Autonomous). I like building small but practical projects:
+        event websites, random pickers, and data analysis tools that actually get used.
+        <br><br>
+        I enjoy working with <strong>Python, Java, SQL, and data visualisation</strong>. For web stuff, I am
+        slowly moving towards cleaner layouts and better user experience. I also spend time experimenting with
+        machine learning basics and prompt engineering to see how AI can support workflows.
+        <br><br>
+        My goal is to keep improving my foundations while shipping real things, even if they are small.
+      </div>
 
-            // Audio function
-            const speakWelcome = () => {
-                if ('speechSynthesis' in window) {
-                    // Create utterance
-                    const text = "Welcome, Ashley Immanuel.";
-                    const utterance = new SpeechSynthesisUtterance(text);
-                    
-                    // Configuration for a slightly robotic feel
-                    utterance.rate = 0.9; // Slower
-                    utterance.pitch = 0.8; // Deeper
-                    
-                    window.speechSynthesis.speak(utterance);
-                }
-            };
+      <div class="about-card">
+        <div class="about-meta">
+          <div>
+            <div class="about-meta-label">Program</div>
+            <div class="about-meta-value">BSc CS (Data Analytics), 2nd year</div>
+          </div>
+          <div>
+            <div class="about-meta-label">College</div>
+            <div class="about-meta-value">
+              Rajagiri College of Social Sciences (Autonomous)
+            </div>
+          </div>
+          <div>
+            <div class="about-meta-label">Location</div>
+            <div class="about-meta-value">Kerala, India</div>
+          </div>
+          <div>
+            <div class="about-meta-label">Languages</div>
+            <div class="about-meta-value">
+              English, Malayalam, Hindi (intermediate)
+            </div>
+          </div>
+        </div>
 
-            startBtn.addEventListener('click', () => {
-                // 1. Hide button
-                startBtn.style.display = 'none';
+        <div>
+          <div class="pill-group-title">Comfortable with</div>
+          <div class="pill-group">
+            <span class="pill">Remote work from home</span>
+            <span class="pill">Client projects</span>
+            <span class="pill">Team collaboration</span>
+            <span class="pill">Learning on the go</span>
+          </div>
+        </div>
 
-                // 2. Play Audio
-                speakWelcome();
+        <div>
+          <div class="pill-group-title">Languages & frameworks</div>
+          <div class="pill-group">
+            <span class="pill">C</span>
+            <span class="pill">C++</span>
+            <span class="pill">Java</span>
+            <span class="pill">Python</span>
+            <span class="pill">Java Swing</span>
+            <span class="pill">Streamlit</span>
+            <span class="pill">Rust (beginner)</span>
+          </div>
+        </div>
 
-                // 3. Show Welcome Text
-                welcomeMsg.classList.add('visible');
+        <div>
+          <div class="pill-group-title">Data & backend</div>
+          <div class="pill-group">
+            <span class="pill">MySQL</span>
+            <span class="pill">PL/SQL</span>
+            <span class="pill">Pandas</span>
+            <span class="pill">NumPy</span>
+            <span class="pill">Seaborn</span>
+            <span class="pill">Matplotlib</span>
+            <span class="pill">Scikit-learn</span>
+            <span class="pill">Data Structures (C)</span>
+          </div>
+        </div>
 
-                // 4. Wait, then reveal site
-                setTimeout(() => {
-                    // Fade out overlay
-                    welcomeOverlay.style.opacity = '0';
-                    
-                    // Scale up main content
-                    mainContent.classList.add('active');
+        <div>
+          <div class="pill-group-title">Extras</div>
+          <div class="pill-group">
+            <span class="pill">Git & GitHub</span>
+            <span class="pill">Prompt engineering</span>
+            <span class="pill">Vibe coding sessions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                    // Remove overlay from DOM after fade
-                    setTimeout(() => {
-                        welcomeOverlay.style.display = 'none';
-                        navbar.style.opacity = '1';
-                    }, 1500);
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal reveal-delay-2">
+    <div class="section-kicker">Projects</div>
+    <div class="section-title">Things I’ve built and am building</div>
+    <div class="section-subtitle">
+      Real projects that helped me learn more than just theory.
+    </div>
 
-                }, 2500); // Wait time for reading/audio
-            });
+    <div class="projects-grid" style="margin-top: 1.8rem;">
+      <!-- Valentine Spectacle -->
+      <article class="project-card">
+        <div class="project-label">Fun web experience</div>
+        <div class="project-title">Valentine Spectacle</div>
+        <div class="project-tech">Python · Web · UI</div>
+        <p class="project-desc">
+          A Valentine-themed interactive experience that makes sending a message feel more special than just plain text,
+          using playful interactions and presentation.
+        </p>
+        <div class="project-footer">
+          <span class="project-pill">Personal project</span>
+          <a class="project-link"
+             href="https://github.com/AshleyImmanuel/valentine-Valentine Spectacle"
+             target="_blank" rel="noreferrer">
+            GitHub ↗
+          </a>
+        </div>
+      </article>
 
+      <!-- Treasure Hunt Website -->
+      <article class="project-card">
+        <div class="project-label">Event website</div>
+        <div class="project-title">Treasure Hunt Website</div>
+        <div class="project-tech">HTML · CSS · JS</div>
+        <p class="project-desc">
+          A web platform for college treasure hunt events. Focused on registration, rulebook, schedule and event info
+          (not clues), so organisers can manage the whole event in one place.
+        </p>
+        <div class="project-footer">
+          <span class="project-pill">Used for event management</span>
+          <a class="project-link"
+             href="https://github.com/AshleyImmanuel/treasure"
+             target="_blank" rel="noreferrer">
+            GitHub ↗
+          </a>
+        </div>
+      </article>
 
-            /* --- 2. GLOBAL PARALLAX SCROLL EFFECT --- */
-            const globalBg = document.getElementById('global-bg');
-            
-            const updateParallax = () => {
-                const scrollY = window.scrollY;
-                const speed = 0.5; 
-                if (globalBg) {
-                    globalBg.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
-                }
-                if (scrollY > 50) {
-                    navbar.classList.add('shadow-lg');
-                } else {
-                    navbar.classList.remove('shadow-lg');
-                }
-            };
+      <!-- IPL Analysis -->
+      <article class="project-card">
+        <div class="project-label">Data · ML · Web</div>
+        <div class="project-title">IPL Analysis Website</div>
+        <div class="project-tech">Python · Streamlit · Machine learning</div>
+        <p class="project-desc">
+          A Streamlit web app that analyses IPL data with ML techniques.  
+          Includes basic visualisations and simple predictions built from historical match statistics.
+        </p>
+        <div class="project-footer">
+          <span class="project-pill">Data analysis practice</span>
+          <a class="project-link"
+             href="https://github.com/AshleyImmanuel/streamlit_project-IPL analysis website using  ML"
+             target="_blank" rel="noreferrer">
+            GitHub ↗
+          </a>
+        </div>
+      </article>
 
-            window.addEventListener('scroll', () => {
-                requestAnimationFrame(updateParallax);
-            });
+      <!-- Final Touch Esports -->
+      <article class="project-card">
+        <div class="project-label">In progress</div>
+        <div class="project-title">Final Touch Esports Website</div>
+        <div class="project-tech">Web design · Branding</div>
+        <p class="project-desc">
+          Designing and building an esports website for the Final Touch team: player info, events, match details and
+          a layout tuned for both players and viewers.
+        </p>
+        <div class="project-footer">
+          <span class="project-pill">Work in progress</span>
+          <span>Coming soon</span>
+        </div>
+      </article>
 
+      <!-- Credora -->
+      <article class="project-card">
+        <div class="project-label">Concept · Academic</div>
+        <div class="project-title">Credora</div>
+        <div class="project-tech">Platform idea · Collaboration</div>
+        <p class="project-desc">
+          Concept for a platform where students can find micro-projects across departments, collaborate,
+          and build a genuine portfolio through real work instead of just grades.
+        </p>
+        <div class="project-footer">
+          <span class="project-pill">Planning & design</span>
+          <span>Exploring architecture & UI</span>
+        </div>
+      </article>
+    </div>
+  </section>
 
-            /* --- 3. SMOOTH SCROLL ANCHORS --- */
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
-    </script>
+  <!-- CONTACT -->
+  <section id="contact" class="reveal reveal-delay-3">
+    <div class="section-kicker">Contact</div>
+    <div class="section-title">Work from home. Projects. Client work.</div>
+    <div class="section-subtitle">
+      Open to remote work and collaborations. Best ways to reach me are email and LinkedIn.
+    </div>
+
+    <div class="contact-card" style="margin-top: 1.7rem;">
+      <div>
+        <div class="pill-group-title">How I like to work</div>
+        <p>
+          I am comfortable working remotely alongside my studies. I like clear communication, small milestones,
+          and honest feedback. If you have a project in mind (even a small one), share a short description,
+          your timeline and what you expect.
+        </p>
+        <div class="contact-chips">
+          <span class="contact-chip">Remote / work from home</span>
+          <span class="contact-chip">Part-time with studies</span>
+          <span class="contact-chip">Programming & data projects</span>
+          <span class="contact-chip">Event / utility sites</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="pill-group-title">Reach out</div>
+        <div class="contact-links">
+          <a class="contact-link-btn"
+             href="mailto:immanuelashley77@gmail.com">
+            Email · immanuelashley77@gmail.com
+          </a>
+          <a class="contact-link-btn"
+             href="https://www.linkedin.com/in/ashley-immanuel-81609731b/"
+             target="_blank" rel="noreferrer">
+            LinkedIn · Connect
+          </a>
+          <a class="contact-link-btn"
+             href="https://github.com/AshleyImmanuel"
+             target="_blank" rel="noreferrer">
+            GitHub · Repositories
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2024 Ashley Immanuel. Built with HTML, CSS and a healthy dose of orange.
+</footer>
+
 </body>
 </html>
